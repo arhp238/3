@@ -1,0 +1,36 @@
+##include <iostream>
+#include <cmath>
+
+int main() {
+    double alpha, v0, beta;
+    int n;
+
+    std::cout << "Ввод угла alpha (в градусах): ";
+    std::cin >> alpha;
+    std::cout << "Ввод начальной скорости v0: ";
+    std::cin >> v0;
+    std::cout << "Вывод коэффициента уменьшения кинетической энергии beta: ";
+    std::cin >> beta;
+    std::cout << "Ввод количества точек касания n: ";
+    std::cin >> n;
+
+    alpha = alpha * M_PI / 180; 
+    double vx = v0 * cos(alpha);
+    double vy = v0 * sin(alpha);
+
+    double x = 0;
+    double y = 0;
+    for (int i = 0; i < n; i++) {
+        x += 2 * vx * vy / (1 - beta);
+        vy = vy * beta;
+    }
+
+    std::cout << "Абсциссы точек касания:" << std::endl;
+    for (int i = 0; i < n; i++) {
+        std::cout << x << std::endl;
+        x -= 2 * vx * vy / (1 - beta);
+        vy = vy / beta;
+    }
+
+    return 0;
+}
