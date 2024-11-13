@@ -1,0 +1,16 @@
+#include <iostream>
+
+int main() {
+    int total_time = 0;
+    int time1, time2, time3; 
+
+    std::cout << "Ввод времени обработки каждой детали на каждом станке (3 числа через пробел):" << std::endl;
+
+    while (std::cin >> time1 >> time2 >> time3) {
+        total_time += time1 + time2 + time3;
+    }
+
+    std::cout << "Все время обработки всех деталей: " << total_time << std::endl;
+
+    return 0;
+}
