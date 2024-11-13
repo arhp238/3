@@ -1,0 +1,40 @@
+#include <iostream> 
+#include <vector> 
+ 
+using namespace std; 
+ 
+int main() { 
+    int n, T; 
+    cin >> n >> T; // Число посетителей и длина смены 
+ 
+    vector<pair<int, int>> visitors(n); // Массив пар (момент прихода, длительность обслуживания) 
+ 
+    for (int i = 0; i < n; ++i) { 
+        int t, l; 
+        cin >> t >> l; // Время прихода и длительность обслуживания 
+        visitors[i] = make_pair(t, l); 
+    } 
+ 
+    int served_clients = 0; 
+    int work_time = 0; 
+    int current_time = 0; 
+ 
+    for (auto& visitor : visitors) { 
+        int arrival_time = visitor.first; 
+        int service_time = visitor.second; 
+ 
+        if (arrival_time + service_time <= T) { 
+            current_time = max(current_time, arrival_time); 
+            work_time += service_time; 
+            served_clients++; 
+            current_time += service_time; 
+        } else { 
+            break; 
+        } 
+    } 
+ 
+    cout << "Количество обслуженных клиентов: " << served_clients << endl; 
+    cout << "Общее время работы: " << work_time << " минут" << endl; 
+ 
+    return 0; 
+}
